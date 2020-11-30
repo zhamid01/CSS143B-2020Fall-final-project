@@ -49,7 +49,27 @@ public class WebController {
         Index indexInJson = indexRepository.findAll().get(0);
         List<String> docs = new ObjectMapper().readValue(indexInJson.getDocs(), List.class);
         model.addAttribute("docs", docs);
+
+        Map<String, List<List<Integer>>> index = new ObjectMapper().readValue(indexInJson.getIndices(), Map.class);
+        String idxStr = indexToString(index);
+        // uncomment the following line to print index to console
+        // System.out.println(idxStr);
+        model.addAttribute("index", idxStr);
         return "docs";
+    }
+
+    private String indexToString(Map<String, List<List<Integer>>> index) {
+        StringBuilder sb = new StringBuilder();
+        for (Map.Entry entry : index.entrySet()) {
+            sb.append("\"" + entry.getKey() + "\" : {<br />");
+            List<List<Integer>> idxInDoc = (List<List<Integer>>) entry.getValue();
+            for (int i = 0; i < idxInDoc.size(); i++) {
+                sb.append(String.format("&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;document[%d]: %s", i, idxInDoc.get(i).toString()));
+                sb.append("<br />");
+            }
+            sb.append("}<br />");
+        }
+        return sb.toString();
     }
 
     @GetMapping("/reindex")

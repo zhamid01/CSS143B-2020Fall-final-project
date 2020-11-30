@@ -33,6 +33,7 @@ tr:nth-child(even) {
     </style>
 </head>
 <body>
+<h2>Document</h2>
 <table class="center" style="text-align:center" border="1">
     <tr>
         <th style="text-align:center">Id</th>
@@ -43,5 +44,8 @@ tr:nth-child(even) {
         <td style="text-align:left" th:text="${doc}"></td>
     </tr>
 </table>
+<br>
+<h2>Index</h2>
+<p th:utext=${index}></p>
 </body>
 </html>

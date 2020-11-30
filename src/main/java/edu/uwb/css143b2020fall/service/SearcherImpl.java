@@ -3,13 +3,8 @@ package edu.uwb.css143b2020fall.service;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-
-/*
-DO NOT CHANGE
- */
 
 @Service
 public class SearcherImpl implements Searcher {
