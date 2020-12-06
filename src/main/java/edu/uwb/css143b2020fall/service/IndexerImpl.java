@@ -16,14 +16,13 @@ public class IndexerImpl implements Indexer {
             for (int i = 0; i < docs.size(); i++) {
                 String n1 = docs.get(i);
                 List<Integer> list = new ArrayList<Integer>();
-                n1.split(" ");
-                for (int k = 0; k < n1.length(); k++) {
-                    String m1 = n1;
+                String[] n2 = n1.split(" ");
+                for (String s : n2) {
                     int count = 0;
-                    for (int j = 0; j < n1.length(); j++) {
-                        if (m1 == n1) {
+                    for (int k = 0; k < n2.length; k++) {
+                        //if (s == n2) {
                             list.add(i);
-                        }
+                       // }
                     }
                     list1.add(list);
                 }
