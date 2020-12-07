@@ -4,6 +4,11 @@ import org.springframework.stereotype.Service;
 
 import java.util.*;
 
+/*
+This site was used as help for this code:
+https://www.baeldung.com/convert-map-values-to-array-list-set
+*/
+
 @Service
 public class IndexerImpl implements Indexer {
     public Map<String, List<List<Integer>>> index(List<String> docs) {
@@ -46,7 +51,6 @@ public class IndexerImpl implements Indexer {
                     list1.add(list);
                     indexes.put(s2[q], list1);
                 }
-
             }
         }
         return indexes;
