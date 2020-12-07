@@ -17,20 +17,15 @@ public class IndexerImpl implements Indexer {
                 String n1 = docs.get(i);
                 List<Integer> list = new ArrayList<Integer>();
                 String[] n2 = n1.split(" ");
-                while (n2 != null) {
-                    for (String s : n2) {
+                    for (int j = 0; j < n2.length; j++) {
                         for (int k = 0; k < n2.length; k++) {
-                            list.add(k);
-                            for (int j = 0; j < n2.length; j++) {
-                                if (n2[k] == n2[j]) {
-                                    list.add(j);
-                                }
+                            if (n2[j] == n2[k]) {
+                                list.add(j);
                             }
                             list1.add(list);
                         }
-                        indexes.put(s, list1);
+                        indexes.put(n2[j], list1);
                     }
-                }
             }
         }
         return indexes;
