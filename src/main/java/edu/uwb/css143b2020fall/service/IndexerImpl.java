@@ -11,7 +11,7 @@ public class IndexerImpl implements Indexer {
         if (docs != null) {
             for (int i = 0; i < docs.size(); i++) {
                 String n1 = docs.get(i);
-                String[] n2 = n1.split(" ");
+                String[] n2 = n1.split("\\s");
                 List<List<Integer>> list1 = new ArrayList<>();
                 HashMap<String, String> s1 = new HashMap<>();
                 for (int m = 0; m < n2.length; m++) {
@@ -22,7 +22,7 @@ public class IndexerImpl implements Indexer {
                 for (int j = 0; j < s2.length; j++) {
                     List<Integer> list = new ArrayList<Integer>();
                     for (int k = 0; k < n2.length; k++) {
-                        if (n2[j].equals(" ")) {
+                        if (n2[j].equals("")) {
                             continue;
                         }
                         if (s2[j] == n2[k]) {
