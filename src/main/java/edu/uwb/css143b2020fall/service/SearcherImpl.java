@@ -36,9 +36,11 @@ public class SearcherImpl implements Searcher {
                 System.out.println(list1);
                 for (int i = 0; i < list1.size(); i++) {
                     List<Integer> list2 = list1.get(i);
-                    for (int j = 0; j < list2.size(); j++) {
-                        if (list2.get(j) != null) {
-                            result.add(i);
+                    if (list2 != null) {
+                        for (int j = 0; j < list2.size(); j++) {
+                            if (list2.get(j) != null) {
+                                result.add(i);
+                            }
                         }
                     }
                 }
@@ -49,6 +51,11 @@ public class SearcherImpl implements Searcher {
     }
 }
 /*
+List<Integer> list2 = list1.get(z);
+                    int count = 0;
+                    System.out.println(list2);
+                    for (int y = 0; y < list1.size(); y++) {
+
             if (index.get(keyPhrase) != null) {
                 List<List<Integer>> list = index.get(keyPhrase);
                 for (int i = 0; i < list.size(); i++) {
