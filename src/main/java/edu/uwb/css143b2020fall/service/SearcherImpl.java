@@ -14,35 +14,41 @@ public class SearcherImpl implements Searcher {
         if (keyPhrase != null) {
             if (index.get(keyPhrase) != null) {
                 String[] r2 = keyPhrase.split("\\s");
-                if (keyPhrase.length() > 0) {
+                List<Integer> list3 = new ArrayList<>();
+                if (r2.length > 0) {
                     List<List<Integer>> list1 = new ArrayList<>();
-                    HashMap<Integer, Integer> l1 = new HashMap<>();
-                    for (int i = 0; i < 1; i++) {
-                        list1 = index.get(r2[i]);
-                        if (list1.get(i) != null) {
-                            l1.put(i, i);
-                        }
-                        for (int j = 1; j < r2.length; j++) {
-                            if (l1.put(i, i) != null) {
-                                continue;
+                    list1 = index.get(r2[0]);
+                    for (int x = 1; x < r2.length; x++) {
+                        List<List<Integer>> list2 = new ArrayList<>();
+                        list2 = index.get(r2[x]);
+                        for (int s = 0; s < list1.size(); s++) {
+                            for (int t = 0; t < list2.size(); t++) {
+                                if (list2.get(t) == list1.get(s)) {
+                                    list3.add(s);
+                                }
                             }
-                            System.out.println(l1);
                         }
+                    }
+                    for (int p = 0; p < list3.size(); p++) {
+                        result.add(list3.get(p));
                     }
                 }
                 List<List<Integer>> list1 = new ArrayList<>();
-                HashMap<Integer, Integer> l2 = new HashMap<>();
+                HashMap<Integer, Integer> l9 = new HashMap<>();
                 list1 = index.get(keyPhrase);
                 System.out.println(list1);
+                int count = 0;
                 for (int i = 0; i < list1.size(); i++) {
                     List<Integer> list2 = list1.get(i);
                     if (list2 != null) {
                         for (int j = 0; j < list2.size(); j++) {
                             if (list2.get(j) != null) {
-                                result.add(i);
+                                result.add(count);
+                                break;
                             }
                         }
                     }
+                    count++;
                 }
             }
 
