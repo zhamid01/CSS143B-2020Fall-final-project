@@ -12,46 +12,49 @@ public class SearcherImpl implements Searcher {
     public List<Integer> search(String keyPhrase, Map<String, List<List<Integer>>> index) {
         List<Integer> result = new ArrayList<>();
         if (keyPhrase != null) {
-            if (index.get(keyPhrase) != null) {
-                String[] r2 = keyPhrase.split("\\s");
-                List<Integer> list3 = new ArrayList<>();
-                if (r2.length > 0) {
-                    List<List<Integer>> list1 = new ArrayList<>();
-                    list1 = index.get(r2[0]);
-                    for (int x = 1; x < r2.length; x++) {
-                        List<List<Integer>> list2 = new ArrayList<>();
-                        list2 = index.get(r2[x]);
-                        for (int s = 0; s < list1.size(); s++) {
-                            for (int t = 0; t < list2.size(); t++) {
-                                if (list2.get(t) == list1.get(s)) {
-                                    list3.add(s);
-                                }
-                            }
-                        }
-                    }
-                    for (int p = 0; p < list3.size(); p++) {
-                        result.add(list3.get(p));
-                    }
-                }
-                List<List<Integer>> list1 = new ArrayList<>();
-                HashMap<Integer, Integer> l9 = new HashMap<>();
-                list1 = index.get(keyPhrase);
-                System.out.println(list1);
-                int count = 0;
-                for (int i = 0; i < list1.size(); i++) {
-                    List<Integer> list2 = list1.get(i);
-                    if (list2 != null) {
-                        for (int j = 0; j < list2.size(); j++) {
-                            if (list2.get(j) != null) {
-                                result.add(count);
-                                break;
-                            }
-                        }
-                    }
-                    count++;
+            String[] r2 = keyPhrase.split("\\s");
+            for (int g = 0; g < r2.length; g++) {
+                if (index.get(r2[g]) == null) {
+                    return result;
                 }
             }
-
+            List<Integer> list3 = new ArrayList<>();
+            if (r2.length > 0) {
+                List<List<Integer>> list1 = new ArrayList<>();
+                list1 = index.get(r2[0]);
+                System.out.println(list1);
+                for (int x = 1; x < r2.length; x++) {
+                    List<List<Integer>> list2 = new ArrayList<>();
+                    list2 = index.get(r2[x]);
+                    System.out.println(list2);
+                    for (int s = 0; s < list1.size(); s++) {
+                        for (int t = 0; t < list2.size(); t++) {
+                            if (list2.get(t).size() != 0 && list1.get(s).size() != 0) {
+                                list3.add(s);
+                            }
+                        }
+                    }
+                }
+                for (int p = 0; p < list3.size(); p++) {
+                    result.add(list3.get(p));
+                    return result;
+                }
+            }
+            List<List<Integer>> list1 = new ArrayList<>();
+            list1 = index.get(keyPhrase);
+            int count = 0;
+            for (int i = 0; i < list1.size(); i++) {
+                List<Integer> list2 = list1.get(i);
+                if (list2 != null) {
+                    for (int j = 0; j < list2.size(); j++) {
+                        if (list2.get(j) != null) {
+                            result.add(count);
+                            break;
+                        }
+                    }
+                }
+                count++;
+            }
         }
         return result;
     }
