@@ -22,21 +22,17 @@ public class SearcherImpl implements Searcher {
             if (r2.length > 0) {
                 List<List<Integer>> list1 = new ArrayList<>();
                 list1 = index.get(r2[0]);
-                System.out.println(list1);
                 for (int x = 1; x < r2.length; x++) {
                     List<List<Integer>> list2 = new ArrayList<>();
                     list2 = index.get(r2[x]);
-                    System.out.println(list2);
                     for (int s = 0; s < list1.size(); s++) {
-                        for (int t = 0; t < list2.size(); t++) {
-                            if (list2.get(t).size() != 0 && list1.get(s).size() != 0) {
-                                list3.add(s);
-                            }
+                        if (list2.get(s).size() > 0 && list1.get(s).size() > 0) {
+                            list3.add(s);
                         }
                     }
-                }
-                for (int p = 0; p < list3.size(); p++) {
-                    result.add(list3.get(p));
+                    for (int p = 0; p < list3.size(); p++) {
+                        result.add(list3.get(p));
+                    }
                     return result;
                 }
             }
