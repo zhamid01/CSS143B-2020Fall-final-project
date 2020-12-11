@@ -7,12 +7,25 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+/*
+I wasn't able to get the code to check if the phrases were in order when I found which
+documents they are in, however, I was able to get the correct documents.
+The way I approached this was to split up the phrase into a string array.
+Then create List<List<Integer>> lists from index and Strings and then put those values into
+a List<Integer>. Then I would go through and check in which documents the words all occur and
+add those to a list. I was not able to check if they were in order, I am thinking I could've
+checked where in the index the words occur and made sure the position of those documents in the
+index were correct. If the keyPhrase was one word I would do similar steps as the multi word
+phrases but instead I would just see where the one word occurred in the List<Integer> and return
+those documents.
+*/
+
 @Service
 public class SearcherImpl implements Searcher {
     public List<Integer> search(String keyPhrase, Map<String, List<List<Integer>>> index) {
         List<Integer> result = new ArrayList<>();
         if (keyPhrase != null) {
-            String[] r2 = keyPhrase.split("\\s");
+            String[] r2 = keyPhrase.split("\\s+");
             for (int g = 0; g < r2.length; g++) {
                 if (index.get(r2[g]) == null) {
                     return result;
@@ -22,16 +35,29 @@ public class SearcherImpl implements Searcher {
             if (r2.length > 0) {
                 List<List<Integer>> list1 = new ArrayList<>();
                 list1 = index.get(r2[0]);
+                List<Integer> i1 = new ArrayList<>();
                 for (int x = 1; x < r2.length; x++) {
-                    List<List<Integer>> list2 = new ArrayList<>();
-                    list2 = index.get(r2[x]);
-                    for (int s = 0; s < list1.size(); s++) {
-                        if (list2.get(s).size() > 0 && list1.get(s).size() > 0) {
-                            list3.add(s);
+                    for (int h = 0; h < list1.size(); h++) {
+                        List<Integer> tmp = list1.get(h);
+                        if (!tmp.isEmpty()) {
+                            i1.add(h);
                         }
                     }
-                    for (int p = 0; p < list3.size(); p++) {
-                        result.add(list3.get(p));
+                    List<List<Integer>> list2 = new ArrayList<>();
+                    list2 = index.get(r2[x]);
+                    List<Integer> i2 = new ArrayList<>();
+                    for (int g = 0; g < list2.size(); g++) {
+                        List<Integer> tmp2 = list2.get(g);
+                        if (!tmp2.isEmpty()) {
+                            i2.add(g);
+                        }
+                    }
+                    for (int j = 0; j < i1.size(); j++) {
+                        for (int s = 0; s < i2.size(); s++) {
+                            if (i1.get(j) == i2.get(s)) {
+                                result.add(i1.get(j));
+                            }
+                        }
                     }
                     return result;
                 }
@@ -55,36 +81,3 @@ public class SearcherImpl implements Searcher {
         return result;
     }
 }
-/*
-List<Integer> list2 = list1.get(z);
-                    int count = 0;
-                    System.out.println(list2);
-                    for (int y = 0; y < list1.size(); y++) {
-
-            if (index.get(keyPhrase) != null) {
-                List<List<Integer>> list = index.get(keyPhrase);
-                for (int i = 0; i < list.size(); i++) {
-                    List<Integer> list1 = list.get(i);
-                    for (int j = 0; j < list1.size(); j++) {
-                        if (list.get(j) != null) {
-                            result.add(i);
-                        }
-                    }
-                }
-            }
-            */
-
-            /*
-            if (index.get(keyPhrase) != null) {
-                for (int i = 0; i < index.get(keyPhrase).size(); i++) {
-                    List<List<Integer>> list = index.get(keyPhrase);
-                    for (int j = 0; j < list.size(); j++) {
-                        List<Integer> list2 = list.get(i);
-                        for (int z = 0; z < list2.size(); z++) {
-                            if (list2.get(z) != null) {
-                                result.add(j);
-                            }
-                        }
-                    }
-                }
-             */
